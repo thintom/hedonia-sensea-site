@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hedonia | Éveillez vos sens</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-purple: #5D0D6E;
+            --soft-ivory: #FDF8F5;
+            --orchid-white: #F4F4F4;
+            --aquatic-mist: #8EC5D4;
+            --pastel-lilac: #E9D5EC;
+            --ethereal-dew: #F6EEF9;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--soft-ivory); color: var(--text-main); font-family: 'Montserrat', sans-serif; font-weight: 300; line-height: 1.7; }
+        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; color: var(--royal-purple); }
+
+        /* Navigation */
+        nav { padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; position: absolute; width: 100%; z-index: 100; }
+        .logo { text-decoration: none; display: flex; flex-direction: column; align-items: center; }
+        .logo-sensea { font-size: 0.6rem; letter-spacing: 0.4rem; text-transform: uppercase; color: var(--text-muted); }
+        .nav-links a { text-decoration: none; color: var(--text-main); margin-left: 3rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; transition: var(--transition); }
+
+        /* Sections */
+        .section-padding { padding: 6rem 10%; }
+        .center-text { text-align: center; max-width: 800px; margin: 0 auto; }
+
+        /* Hero */
+        .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, var(--soft-ivory) 0%, var(--ethereal-dew) 100%); }
+        .hero h1 { font-size: 4rem; font-style: italic; margin-bottom: 1rem; }
+
+        /* Manifesto (La Marque) */
+        .manifesto { background-color: white; border-bottom: 1px solid var(--pastel-lilac); }
+
+        /* Product Section (Elya) */
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .image-container { background-color: var(--orchid-white); border-radius: 200px 200px 0 0; height: 500px; overflow: hidden; }
+        .image-placeholder { width: 100%; height: 100%; background: linear-gradient(to bottom, var(--pastel-lilac), var(--ethereal-dew)); display: flex; align-items: center; justify-content: center; font-style: italic; color: var(--royal-purple); }
+
+        /* How-To Grid (6 Steps) */
+        .how-to-section { background-color: var(--ethereal-dew); }
+        .how-to-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+        .step-card { background: white; padding: 1.5rem; border-radius: 15px; text-align: center; transition: var(--transition); }
+        .step-image { height: 150px; background: var(--orchid-white); margin-bottom: 1rem; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Specs */
+        .specs-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; list-style: none; font-size: 0.9rem; }
+        .specs-list li::before { content: "• "; color: var(--aquatic-mist); font-weight: bold; }
+
+        /* Blog/FAQ Footer Links */
+        .extra-links { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 1px solid var(--pastel-lilac); }
+
+        .cta-button { padding: 1rem 2.5rem; background: var(--royal-purple); color: white; text-decoration: none; border-radius: 50px; display: inline-block; margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.1em; }
+
+        @media (max-width: 768px) {
+            .product-grid, .how-to-grid, .extra-links, .specs-list { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+
+
+
+        /* New Stacked Layout for Readability */
+        .how-to-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem; /* Large breathing space between steps */
+            margin-top: 4rem;
+        }
+
+        .step-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Image takes 60% of width */
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* Alternating layout: every second step flips the image to the right */
+        .step-card:nth-child(even) {
+            direction: rtl;
+        }
+        .step-card:nth-child(even) .step-text {
+            direction: ltr; /* Keeps text reading left-to-right */
+        }
+
+        .step-image img {
+            width: 100%;
+            height: auto; /* Let the image set its own height */
+            display: block;
+            object-fit: contain; /* Shows the FULL image without cropping */
+            background: white; /* Adds a clean background if the photo is a different shape */
+        }
+
+        .step-image {
+            width: 100%;
+            height: auto; /* Remove any fixed height constraints */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+
+        .step-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile: stack everything vertically */
+        @media (max-width: 768px) {
+            .step-card, .step-card:nth-child(even) { 
+                grid-template-columns: 1fr; 
+                direction: ltr;
+                gap: 1.5rem;
+            }
+        }
+
+        .image-container {
+            background-color: white; /* Matches the product background */
+            border-radius: 200px 200px 0 0; /* Keeps the elegant arch */
+            height: 600px; /* Maintains the height of the section */
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            /* Use 'contain' to see the WHOLE image (no crop) */
+            /* Use 'cover' if you want the image to fill the arch completely */
+            object-fit: contain; 
+            display: block;
+        }
+
+        .logo-img {
+            height: 80px; /* Adjust based on your nav bar height */
+            width: auto;  /* Maintains aspect ratio */
+            display: block;
+        }
+
+        /* Optional: Center the logo vertically if using flexbox on <nav> */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- <nav>
+        <a href="#" class="logo brand-font">Hedonia <span class="logo-sensea">SENSEA</span></a>
+        <div class="nav-links">
+            <a href="#">Blog</a>
+            <a href="#">FAQ</a>
+        </div>
+    </nav> -->
+
+    <nav>
+        <a href="#" class="logo">
+            <img src="logo2.jpeg" alt="Hedonia Sensea Logo" class="logo-img">
+        </a>
+        <div class="nav-links">
+            <a href="#">Blog</a>
+            <a href="#">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="center-text">
+            <h1>Éveillez vos sens</h1>
+            <p>Notre mission est de concevoir et de proposer des produits et des expériences de bien-être intime qui favorisent la connexion à soi.</p> 
+            <!-- Le design au service de l'intimité féminine -->
+        </div>
+    </section>
+
+    <!-- LA MARQUE -->
+    <section class="section-padding manifesto">
+        <div class="center-text">
+            <h2 style="margin-bottom: 1.5rem;">La Marque</h2>
+            <p>Découvrez <strong>Hedonia Sensea</strong>, la marque française dédiée au bien-être intime et à l’épanouissement personnel. Notre mission est de transformer le soin de soi en un véritable rituel de reconnexion pour vous permettre de vous réapproprier vos sens en toute sérénité.</p>
+            <br>
+            <p>Alliant qualité médicale, éthique et design élégant, Hedonia propose des solutions de santé intime féminine pensées pour l’équilibre du corps et de l’esprit. À travers nos créations comme Elya, nous prônons une approche bienveillante et experte de l’intime, pour vous aider à ralentir et à cultiver votre harmonie intérieure.</p>
+        </div>
+    </section>
+
+    <!-- ELYA PRODUCT -->
+    <section class="section-padding">
+        <div class="product-grid">
+            <div class="image-container">
+                <div class="image-placeholder"> <img src="La Double Stimulation.jpg" alt="Chargement Elya"></div>
+            </div>
+            <div class="content">
+                <span style="color: var(--aquatic-mist); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.2em;">Stimulateur Rabbit</span>
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Elya : L'Éveil des Sens par la Double Stimulation</h2>
+                <p>Découvrez Elya, le stimulateur phare d'Hedonia Sensea conçu pour une expérience de bien-être inédite. Plus qu’un simple accessoire, ce modèle de type "rabbit" a été pensé pour stimuler avec précision toutes les terminaisons nerveuses sensibles.</p>
+                <br>
+                <p>Grâce à l'alliance innovante d'une douce succion et de vibrations pulsées, Elya annonce une nouvelle ère de plaisir et de reconnexion à soi. Son design ergonomique en silicone de haute qualité et ABS offre un toucher soyeux, garantissant un rituel de soin à la fois puissant, élégant et respectueux de votre corps.
+                </p>
+                
+                <ul class="specs-list">
+                    <li>Double Stimulation (Vibration + Succion)</li>
+                    <li>10 modes de succion pulsée</li>
+                    <li>8 modes de vibration</li>
+                    <li>Silicone médical & ABS premium</li>
+                    <li>Étanche (IPX5)</li>
+                    <li>60 min d'autonomie</li>
+                </ul>
+                <a href="#" class="cta-button">AJOUTER AU PANIER — 40€</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO / RITUEL -->
+    <section class="section-padding how-to-section">
+        <div class="center-text">
+            <span class="accent-text">Guide d'utilisation</span>
+            <h2>Votre Rituel Elya</h2>
+            <p>6 étapes détaillées pour une expérience optimale et sereine.</p>
+        </div>
+
+        <div class="how-to-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="2.jpg" alt="Chargement Elya">
+                </div>
+                <div class="step-text">
+                    <h3>01. Préparer</h3>
+                    <p><strong>Chargement complet :</strong> Branchez votre Elya via son port lumineux. Une charge de 120 minutes offre 60 minutes de plaisir continu.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="3.jpg" alt="Lubrification">
+                </div>
+                <div class="step-text">
+                    <h3>02. Protéger</h3>
+                    <p><strong>Confort absolu :</strong> Appliquez une noisette de lubrifiant à base d'eau sur les zones de stimulation pour préserver le silicone soyeux.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="6.jpg" alt="Activation">
+                </div>
+                <div class="step-text">
+                    <h3>03. Allumer</h3>
+                    <p><strong>Interface intuitive :</strong> Maintenez le bouton d'alimentation pour activer les capteurs et débuter votre voyage sensoriel.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="4.jpg" alt="Exploration">
+                </div>
+                <div class="step-text">
+                    <h3>04. Ressentir</h3>
+                    <p><strong>Exploration :</strong> Alternez entre les 10 modes de succion et 8 modes de vibration pour trouver l'harmonie parfaite.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="5.jpg" alt="Nettoyage">
+                </div>
+                <div class="step-text">
+                    <h3>05. Entretenir</h3>
+                    <p><strong>Hygiène :</strong> Grâce à sa certification IPX5, nettoyez simplement votre appareil à l'eau tiède avec un savon doux après usage.</p>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="La Double Stimulation.jpg" alt="Rangement">
+                </div>
+                <div class="step-text">
+                    <h3>06. Discrétion</h3>
+                    <p><strong>Sérénité :</strong> Rangez votre Elya dans sa pochette de protection pour le maintenir à l'abri de la poussière jusqu'à votre prochain rituel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- FOOTER RESOURCES -->
+    <section class="section-padding extra-links">
+        <div>
+            <h3>Aide & FAQ</h3>
+            <p><small>Questions sur la sécurité ou l'utilisation ? Nos experts vous répondent pour un achat serein.</small></p>
+        </div>
+        <div>
+            <h3>Le Blog Hedonia</h3>
+            <p><small>Astuces rituels et guides pour mieux comprendre votre corps et cultiver votre harmonie.</small></p>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 4rem; opacity: 0.6; font-size: 0.7rem;">
+        HEDONIA SENSEA • LIVRAISON DISCRÈTE • PACKAGING ÉCO-RESPONSABLE
+    </footer>
+
+</body>
+</html>
